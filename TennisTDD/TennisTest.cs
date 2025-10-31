@@ -82,7 +82,7 @@ public class TennisScoreCalculator
             return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
         if (player1Points == 1 && player2Points == 0)
             return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
-        return "";
+        return "Forty-Thirty";
     }
 
     public string TraducirPuntaje(int puntaje)
