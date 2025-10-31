@@ -1,4 +1,4 @@
-[] DebeRetornarLoveAll_Si_AmbosJugadoresTienenCeroPuntos
+[x] DebeRetornarLoveAll_Si_AmbosJugadoresTienenCeroPuntos
 [] DebeRetornarFifteenLove_Si_JugadorUnoTieneUnPuntoYJugadorDosTieneCeroPuntos
 [] DebeRetornarFifteenAll_Si_AmbosJugadoresTienenUnPunto
 [] DebeRetornarThirtyFifteen_Si_JugadorUnoTieneDosPuntosYJugadorDosTieneUnPunto 
