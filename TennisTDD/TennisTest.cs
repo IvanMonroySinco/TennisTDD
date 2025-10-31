@@ -113,7 +113,6 @@ public class TennisTest
         resultado.Should().Be("Victoria jugador Uno");
     }
     
-    
     [Fact]
     public void DebeRetornarVictoriaJugadorDos_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneOcho()
     {
@@ -123,6 +122,17 @@ public class TennisTest
         var resultado = juego.Score(6,8);
         //Assert
         resultado.Should().Be("Victoria jugador Dos");
+    }
+    
+    [Fact]
+    public void DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneDiezPuntosYJugadorDosTieneOcho()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(10,8);
+        //Assert
+        resultado.Should().Be("Victoria jugador Uno");
     }
 }
 

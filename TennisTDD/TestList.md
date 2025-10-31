@@ -11,7 +11,7 @@
 [x] DebeRetornarVentajaJugadorUno_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneCinco
 [x] DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneCuatro
 [x] DebeRetornarVictoriaJugadorDos_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneOcho
-
+[] DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneDiezPuntosYJugadorDosTieneOcho
 
 
 
