@@ -85,37 +85,21 @@ public class TennisTest
         resultado.Should().Be("Deuce");
     }
     
-    [Fact]
-    public void DebeRetornarVentajaJugadorUno_Si_JugadorUnoTieneCincoPuntosYJugadorDosTieneCuatro()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(5,4);
-        //Assert
-        resultado.Should().Be("Ventaja jugador Uno");
-    }
 
-    [Fact]
-    public void DebeRetornarVentajaJugadorDos_Si_JugadorUnoTieneCincoPuntosYJugadorDosTieneSeis()
+    [Theory]
+    [InlineData(5, 4, "Ventaja jugador Uno")]
+    [InlineData(5, 6, "Ventaja jugador Dos")]
+    [InlineData(6, 5, "Ventaja jugador Uno")]
+    [InlineData(7, 8, "Ventaja jugador Dos")]
+    
+    public void DebeRetornarElJugadorQueEstaEnVentaja_Si_AlgunJugadorTieneMasDeCuatroPuntosYNoEstanEmpatados(int  player1Points, int player2Points,  string resultadoEsperado)
     {
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(5,6);
+        var resultado = juego.Score(player1Points,player2Points);
         //Assert
-        resultado.Should().Be("Ventaja jugador Dos");
-    }
-
-    [Fact]
-    public void DebeRetornarVentajaJugadorUno_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneCinco()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(6,5);
-        //Assert
-        resultado.Should().Be("Ventaja jugador Uno");
+        resultado.Should().Be(resultadoEsperado);
     }
     
 }
@@ -124,26 +108,24 @@ public class TennisScoreCalculator
 {
     public string Score(int player1Points, int player2Points)
     {
-        if (player1Points == 5 && player2Points == 4)
+        if (player1Points == player2Points)
+            return JugadoresEmpatados(player1Points);
+        
+        if (player1Points >= 4 || player2Points >= 4)
         {
-            return "Ventaja jugador Uno";
-        }
-        if (player1Points == 5 && player2Points == 6)
-        {
+            int diff = player1Points - player2Points;
+            if (diff == 1)
+                return "Ventaja jugador Uno";
             return "Ventaja jugador Dos";
         }
-        if (player1Points == 6 && player2Points == 5)
-        {
-            return "Ventaja jugador Uno";
-        }
-        if (player1Points == player2Points)
-        {
-            if (player1Points >= 4)
-                return "Deuce";
-            return $"{TraducirPuntaje(player1Points)}-All";
-        }
-        
         return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
+    }
+
+    private string JugadoresEmpatados(int player1Points)
+    {
+        if (player1Points >= 4)
+            return "Deuce";
+        return $"{TraducirPuntaje(player1Points)}-All";
     }
 
     public string TraducirPuntaje(int puntaje)
