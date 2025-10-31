@@ -69,40 +69,35 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Forty-Thirty");
     }
-
-    [Fact]
-    public void DebeRetornarDeuce_Si_AmbosJugadoresTienenCuatroPuntos()
+    
+    [Theory]
+    [InlineData(4, 4)]
+    [InlineData(6, 6)]
+    [InlineData(8, 8)]
+    [InlineData(9, 9)]
+    public void DebeRetornarDeuce_Si_AmbosJugadoresTienenMasDeCuatroPuntosYEstanEmpatados(int player1Points, int player2Points)
     {
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(4, 4);
+        var resultado = juego.Score(player1Points, player2Points);
         //Assert
         resultado.Should().Be("Deuce");
     }
-
-    [Fact]
-    public void DebeRetornarDeuce_Si_AmbosJugadoresTienenSeisPuntos()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(6, 6);
-        //Assert
-        resultado.Should().Be("Deuce");
-    }
+    
 }
 
 public class TennisScoreCalculator
 {
     public string Score(int player1Points, int player2Points)
     {
-        if (player1Points == 4 || player1Points == 6)
-        {
-            return "Deuce";
-        }
         if (player1Points == player2Points)
+        {
+            if (player1Points >= 4)
+                return "Deuce";
             return $"{TraducirPuntaje(player1Points)}-All";
+        }
+        
         return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
     }
 
