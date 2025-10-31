@@ -95,6 +95,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Ventaja jugador Uno");
     }
+
+    [Fact]
+    public void DebeRetornarVentajaJugadorDos_Si_JugadorUnoTieneCincoPuntosYJugadorDosTieneSeis()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(5,6);
+        //Assert
+        resultado.Should().Be("Ventaja jugador Dos");
+    }
     
 }
 
