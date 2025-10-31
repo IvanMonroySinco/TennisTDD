@@ -69,6 +69,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Forty-Thirty");
     }
+
+    [Fact]
+    public void DebeRetornarDeuce_Si_AmbosJugadoresTienenCuatroPuntos()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(4, 4);
+        //Assert
+        resultado.Should().Be("Deuce");
+    }
     
 }
 
