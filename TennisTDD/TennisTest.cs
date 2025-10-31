@@ -101,7 +101,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be(resultadoEsperado);
     }
-    
+
+    [Fact]
+    public void DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneCuatro()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(6,4);
+        //Assert
+        resultado.Should().Be("Victoria jugador Uno");
+    }
 }
 
 public class TennisScoreCalculator
