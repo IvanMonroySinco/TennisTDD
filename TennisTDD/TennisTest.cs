@@ -42,6 +42,10 @@ public class TennisScoreCalculator {
     
     public string Score(int player1Points, int player2Points)
     {
+        if (player1Points == 1 && player2Points == 1)
+        {
+            return "Fifteen-All"; 
+        }
         if (player1Points == 1)
         {
             return "Fifteen-Love";
