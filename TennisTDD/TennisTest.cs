@@ -80,7 +80,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Deuce");
     }
-    
+
+    [Fact]
+    public void DebeRetornarDeuce_Si_AmbosJugadoresTienenSeisPuntos()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(6, 6);
+        //Assert
+        resultado.Should().Be("Deuce");
+    }
 }
 
 public class TennisScoreCalculator
