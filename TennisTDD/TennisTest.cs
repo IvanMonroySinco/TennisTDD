@@ -132,6 +132,10 @@ public class TennisScoreCalculator
         {
             return "Ventaja jugador Dos";
         }
+        if (player1Points == 6 && player2Points == 5)
+        {
+            return "Ventaja jugador Uno";
+        }
         if (player1Points == player2Points)
         {
             if (player1Points >= 4)
