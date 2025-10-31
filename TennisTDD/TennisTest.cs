@@ -47,6 +47,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Thirty-Fifteen");
     }
+
+    [Fact]
+    public void DebeRetornarFortyAll_Si_AmbosJugadoresTienenTresPuntos()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(3,3);
+        //Assert
+        resultado.Should().Be("Forty-All");
+    }
 }
 
 public class TennisScoreCalculator {
