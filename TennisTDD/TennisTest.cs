@@ -102,6 +102,10 @@ public class TennisScoreCalculator
 {
     public string Score(int player1Points, int player2Points)
     {
+        if (player1Points == 5)
+        {
+            return "Ventaja jugador Uno";
+        }
         if (player1Points == player2Points)
         {
             if (player1Points >= 4)
