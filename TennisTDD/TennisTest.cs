@@ -97,7 +97,7 @@ public class TennisScoreCalculator
 {
     public string Score(int player1Points, int player2Points)
     {
-        if (player1Points == 4)
+        if (player1Points == 4 || player1Points == 6)
         {
             return "Deuce";
         }
