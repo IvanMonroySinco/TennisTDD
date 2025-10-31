@@ -10,7 +10,7 @@ public class TennisTest
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(0,0);
+        var resultado = juego.Score(0, 0);
         //Assert
         resultado.Should().Be("Love-All");
     }
@@ -21,7 +21,7 @@ public class TennisTest
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(1,0);
+        var resultado = juego.Score(1, 0);
         //Assert
         resultado.Should().Be("Fifteen-Love");
     }
@@ -32,7 +32,7 @@ public class TennisTest
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(1,1);
+        var resultado = juego.Score(1, 1);
         //Assert
         resultado.Should().Be("Fifteen-All");
     }
@@ -43,7 +43,7 @@ public class TennisTest
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(2,1);
+        var resultado = juego.Score(2, 1);
         //Assert
         resultado.Should().Be("Thirty-Fifteen");
     }
@@ -54,24 +54,37 @@ public class TennisTest
         //Arrange
         var juego = new TennisScoreCalculator();
         //Act
-        var resultado = juego.Score(3,3);
+        var resultado = juego.Score(3, 3);
         //Assert
         resultado.Should().Be("Forty-All");
     }
+    
 }
 
-public class TennisScoreCalculator {
-    
+public class TennisScoreCalculator
+{
     public string Score(int player1Points, int player2Points)
     {
-        if (player1Points == 3 && player2Points == 3)
-            return "Forty-All";
+        if (player1Points == player2Points)
+            return $"{TraducirPuntaje(player1Points)}-All";
         if (player1Points == 2 && player2Points == 1)
-            return "Thirty-Fifteen";
-        if (player1Points == 1 && player2Points == 1)
-            return "Fifteen-All";
-        if (player1Points == 1)
-            return "Fifteen-Love";
-        return "Love-All";
+            return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
+        if (player1Points == 1 && player2Points == 0)
+            return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
+        return "";
     }
+
+    public string TraducirPuntaje(int puntaje)
+    {
+        return puntaje switch
+        {
+            0 => "Love",
+            1 => "Fifteen",
+            2 => "Thirty",
+            3 => "Forty",
+            _ => ""
+        };
+    }
+    
+    
 }
