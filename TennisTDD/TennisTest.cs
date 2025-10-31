@@ -25,6 +25,17 @@ public class TennisTest
         //Assert
         resultado.Should().Be("Fifteen-Love");
     }
+
+    [Fact]
+    public void DebeRetornarFifteenAll_Si_AmbosJugadoresTienenUnPunto()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(1,1);
+        //Assert
+        resultado.Should().Be("Fifteen-All");
+    }
 }
 
 public class TennisScoreCalculator {
