@@ -85,6 +85,17 @@ public class TennisTest
         resultado.Should().Be("Deuce");
     }
     
+    [Fact]
+    public void DebeRetornarVentajaJugadorUno_Si_JugadorUnoTieneCincoPuntosYJugadorDosTieneCuatro()
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(5,4);
+        //Assert
+        resultado.Should().Be("Ventaja jugador Uno");
+    }
+    
 }
 
 public class TennisScoreCalculator
