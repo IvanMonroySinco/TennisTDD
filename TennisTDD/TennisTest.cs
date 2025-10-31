@@ -101,71 +101,56 @@ public class TennisTest
         //Assert
         resultado.Should().Be(resultadoEsperado);
     }
+    
+    [Theory]
+    [InlineData(6, 4, "Victoria jugador Uno")]
+    [InlineData(6, 8, "Victoria jugador Dos")]
+    [InlineData(10, 4, "Victoria jugador Uno")]
+    [InlineData(0, 4, "Victoria jugador Dos")]
+    
+    public void DebeRetornarElJugadorGanador_Si_AlgunJugadorObtuvoCuatroPuntosOMasYLlevaDosDeVentaja(int  player1Points, int player2Points,  string resultadoEsperado)
+    {
+        //Arrange
+        var juego = new TennisScoreCalculator();
+        //Act
+        var resultado = juego.Score(player1Points,player2Points);
+        //Assert
+        resultado.Should().Be(resultadoEsperado);
+    }
 
-    [Fact]
-    public void DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneCuatro()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(6,4);
-        //Assert
-        resultado.Should().Be("Victoria jugador Uno");
-    }
     
-    [Fact]
-    public void DebeRetornarVictoriaJugadorDos_Si_JugadorUnoTieneSeisPuntosYJugadorDosTieneOcho()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(6,8);
-        //Assert
-        resultado.Should().Be("Victoria jugador Dos");
-    }
-    
-    [Fact]
-    public void DebeRetornarVictoriaJugadorUno_Si_JugadorUnoTieneDiezPuntosYJugadorDosTieneOcho()
-    {
-        //Arrange
-        var juego = new TennisScoreCalculator();
-        //Act
-        var resultado = juego.Score(10,8);
-        //Assert
-        resultado.Should().Be("Victoria jugador Uno");
-    }
 }
 
 public class TennisScoreCalculator
 {
     public string Score(int player1Points, int player2Points)
     {
-        if (player1Points == 6 &&  player2Points == 4)
-        {
-            return "Victoria jugador Uno";
-        }
-        
-        if (player1Points == 6 &&  player2Points == 8)
-        {
-            return "Victoria jugador Dos";
-        }
-        
-        if (player1Points == 10 &&  player2Points == 8)
-        {
-            return "Victoria jugador Uno";
-        }
-        
         if (player1Points == player2Points)
             return JugadoresEmpatados(player1Points);
         
         if (player1Points >= 4 || player2Points >= 4)
         {
             int diff = player1Points - player2Points;
-            if (diff == 1)
-                return "Ventaja jugador Uno";
-            return "Ventaja jugador Dos";
+            if (Math.Abs(diff) == 1)
+                return JugadorEnVentaja(diff);
+            return JugadorGanador(diff);
         }
+        
         return $"{TraducirPuntaje(player1Points)}-{TraducirPuntaje(player2Points)}";
+    }
+
+    private string JugadorGanador(int diff)
+    {
+        if (diff >= 2)
+            return "Victoria jugador Uno";
+        return "Victoria jugador Dos";
+    }
+
+    private static string JugadorEnVentaja(int diff)
+    {
+        if (diff == 1)
+            return "Ventaja jugador Uno";
+        return "Ventaja jugador Dos";
     }
 
     private string JugadoresEmpatados(int player1Points)
